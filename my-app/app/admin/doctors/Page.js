@@ -3,7 +3,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Contract, ethers } from "ethers";
 import { Web3walletContext } from "@/hooks/web3wallet";
 import { NEW_DOCTRO_CONTRACT_ADDRESS, doctor_abi } from "@/constants";
-function page() {
+function Page() {
   const [data, setData] = useState([]);
   const [tempdata, setTempdata] = useState([]);
   const { getProviderOrSigner } = useContext(Web3walletContext);
@@ -88,4 +88,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

@@ -8,7 +8,7 @@ import {
   patient_abi,
 } from "@/constants";
 import { Web3walletContext } from "@/hooks/web3wallet";
-function page() {
+function Page() {
   const { getProviderOrSigner, setLoading } = useContext(Web3walletContext);
   const [data, setData] = useState({
     doctorid: "",
@@ -150,4 +150,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;
