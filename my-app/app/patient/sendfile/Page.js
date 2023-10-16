@@ -3,8 +3,7 @@ import { NEW_DOCTRO_CONTRACT_ADDRESS, doctor_abi } from "@/constants";
 import { Web3walletContext } from "@/hooks/web3wallet";
 import React, { useContext, useState } from "react";
 import { Contract } from "ethers";
-
-function page() {
+const Page = () => {
   const { getProviderOrSigner } = useContext(Web3walletContext);
   const [doctorid, setDoctorId] = useState("");
   const [file, setFile] = useState();
@@ -95,6 +94,6 @@ function page() {
       </div>
     </div>
   );
-}
+};
 
-export default page;
+export default Page;
