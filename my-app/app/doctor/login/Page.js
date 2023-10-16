@@ -3,7 +3,7 @@ import { useState, useContext } from "react";
 import { Web3walletContext } from "@/hooks/web3wallet";
 import { useRouter } from "next/navigation";
 
-export default function LoginPage() {
+const LoginPage = () => {
   const { type, walletConnected, connectWallet, setType } =
     useContext(Web3walletContext);
   const router = useRouter();
@@ -42,4 +42,6 @@ export default function LoginPage() {
       </div>
     </div>
   );
-}
+};
+
+export default LoginPage;

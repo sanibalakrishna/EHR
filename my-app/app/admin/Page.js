@@ -3,7 +3,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { useRouter } from "next/navigation";
 import { Web3walletContext } from "@/hooks/web3wallet";
 
-function Page() {
+const Page = () => {
   const { type, walletConnected, address } = useContext(Web3walletContext);
   const [adminid, setAdminId] = useState("");
   const router = useRouter();
@@ -35,6 +35,6 @@ function Page() {
       </div>
     </div>
   );
-}
+};
 
 export default Page;

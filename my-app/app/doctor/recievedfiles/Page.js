@@ -9,7 +9,7 @@ import {
 } from "@/constants";
 import { Web3walletContext } from "@/hooks/web3wallet";
 
-function Page() {
+const Page = () => {
   const { getProviderOrSigner, setLoading } = useContext(Web3walletContext);
   const [data, setData] = useState([]);
 
@@ -77,6 +77,6 @@ function Page() {
       </div>
     </div>
   );
-}
+};
 
 export default Page;

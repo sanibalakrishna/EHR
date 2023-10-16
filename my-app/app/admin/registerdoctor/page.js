@@ -4,7 +4,7 @@ import { Contract, ethers } from "ethers";
 import { NEW_DOCTRO_CONTRACT_ADDRESS, doctor_abi } from "@/constants";
 import { Web3walletContext } from "@/hooks/web3wallet";
 
-function page() {
+const Page = () => {
   const { getProviderOrSigner, setLoading } = useContext(Web3walletContext);
   const [data, setData] = useState({
     name: "",
@@ -157,6 +157,6 @@ function page() {
       </div>
     </div>
   );
-}
+};
 
 export default page;
