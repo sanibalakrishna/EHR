@@ -7,7 +7,7 @@
 const { ethers } = require("hardhat");
 
 async function main() {
-  const doctorContract = await ethers.deployContract("Reports");
+  const doctorContract = await ethers.deployContract("Bill");
   const deployedAddress = await doctorContract.getAddress();
 
   console.log("Doctor Contract Address ", deployedAddress);

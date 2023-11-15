@@ -165,16 +165,21 @@ const RenderList = ({ path }) => {
     patient: [
       { title: "profile", path: "/patient/profile" },
       { title: "send file", path: "/patient/sendfile" },
-      { title: "appointments", path: "/patient/appointments" },
       { title: "recievedfiles", path: "/patient/recievedfiles" },
+      { title: "appointments", path: "/patient/appointments" },
       { title: "examine details", path: "/patient/examinedetails" },
       { title: "buy insurance", path: "/patient/buyinsurance" },
+      { title: "insurances", path: "/patient/insurances" },
+      { title: "paybill", path: "/patient/paybill" },
+      { title: "bills", path: "/patient/bills" },
     ],
     admin: [
       { title: "add doctor", path: "/admin/registerdoctor" },
       { title: "book an appointment", path: "/admin/bookappointment" },
+      { title: "generate bill", path: "/admin/generatebill" },
       { title: "doctors", path: "/admin/doctors" },
       { title: "patients", path: "/admin/patients" },
+      { title: "bills", path: "/admin/bills" },
     ],
   });
   const handlePath = (url) => {

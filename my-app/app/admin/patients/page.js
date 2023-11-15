@@ -27,6 +27,7 @@ const Page = () => {
     for (let i = 0; i < data[0].length; i++) {
       resdata[i] = { key: data[0][i], value: data[1][i] };
     }
+    console.log(resdata);
     setData(resdata);
   };
   useEffect(() => {
@@ -73,21 +74,21 @@ const Page = () => {
                       </div>
                     </div>
                     <div>
-                      <div className="font-bold">Balakrishna</div>
+                      <div className="font-bold">{item.value[0]}</div>
                     </div>
                   </div>
                 </td>
                 <td>
-                  22
+                  {item.value[1]}
                   <br />
                   <span className="badge badge-ghost badge-sm">Years</span>
                 </td>
-                <td>Male</td>
-                <th>159 cm</th>
-                <th>75 kg</th>
-                <th>venkatagirikota,Andhra Pradesh</th>
-                <th>sanibalakrishna@gmail.com</th>
-                <th>7286811437</th>
+                <td> {item.value[2]}</td>
+                <th> {item.value[3]}cm</th>
+                <th> {item.value[4]}kg</th>
+                <th> {item.value[5]}</th>
+                <th> {item.value[6]}</th>
+                <th> {item.value[7]}</th>
               </tr>
             ))}
           </tbody>
