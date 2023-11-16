@@ -19,10 +19,11 @@ const Page = () => {
     ambulanceAmount: 0,
     status: "Alive",
   });
-
+  const [temploading, setTemploading] = useState(false);
   const handleAddBill = async (e) => {
     e.preventDefault();
     try {
+      setTemploading(true);
       const signer = await getProviderOrSigner(true);
       const billContract = new Contract(
         NEW_BILL_CONTRACT_ADDRESS,
@@ -49,20 +50,23 @@ const Page = () => {
           signer
         );
         const cliamLifeinsurance =
-          await insuraceContract.submitLifeInsuranceClaim(
-            "billid",
-            "amount",
-            signer.address,
-            {
-              gasLimit: 500000,
-              gasPrice: ethers.parseUnits("100", "gwei"),
-            }
-          );
+          await insuraceContract.submitLifeInsuranceClaim(signer.address, {
+            gasLimit: 500000,
+            gasPrice: ethers.parseUnits("100", "gwei"),
+          });
       }
       console.log(billId);
       setLoading(true);
-
+      setTemploading(false);
       setLoading(false);
+      setData({
+        name: "",
+        patientId: "",
+        disease: "",
+        billAmount: 0,
+        ambulanceAmount: 0,
+        status: "Alive",
+      });
     } catch (err) {
       console.error(err.message);
       // console.error(execution reverted:)
@@ -181,7 +185,11 @@ const Page = () => {
                 handleAddBill(e);
               }}
             >
-              Generate Bill
+              {temploading ? (
+                <span className="loading loading-ring loading-md"></span>
+              ) : (
+                "Generate Bill"
+              )}
             </button>
           </div>
         </form>

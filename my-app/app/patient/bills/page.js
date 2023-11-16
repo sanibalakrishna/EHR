@@ -72,6 +72,12 @@ const Page = () => {
     try {
       let total = parseInt(paymentdata[4]);
       const signer = await getProviderOrSigner(true);
+
+      const billContract = new Contract(
+        NEW_BILL_CONTRACT_ADDRESS,
+        bill_abi,
+        signer
+      );
       if (usehealthinsurance) {
         let billamount = 0;
         if (parseInt(healthinsurance[9]) >= total) {
@@ -88,7 +94,7 @@ const Page = () => {
           insurance_abi,
           signer
         );
-        const response = await insuraceContract.getAllBillDetails(
+        const response = await insuraceContract.submitHealthInsuranceClaim(
           "0xd75AbAA559Fee88F030923e2152BAdA777BC7a03",
           paymentdata[1]?.toString(),
           billamount,
@@ -97,6 +103,12 @@ const Page = () => {
           paymentdata[3]?.toString()
         );
         console.log(response);
+        const paybill = await billContract.payBill(
+          signer.address,
+          paymentdata[1]?.toString(),
+          billamount,
+          0
+        );
       } else {
         const transaction = {
           to: "0xd75AbAA559Fee88F030923e2152BAdA777BC7a03",
@@ -104,6 +116,13 @@ const Page = () => {
         };
         const txResponse = await signer.sendTransaction(transaction);
         console.log("Transaction hash:", txResponse.hash);
+
+        const paybill = await billContract.payBill(
+          signer.address,
+          paymentdata[1]?.toString(),
+          0,
+          billamount
+        );
       }
     } catch (error) {
       console.log(error);
