@@ -78,54 +78,57 @@ const Page = () => {
         bill_abi,
         signer
       );
+      let remainingAmount = total + parseInt(paymentdata[8]);
+      let billamount = 0;
       if (usehealthinsurance) {
-        let billamount = 0;
-        if (parseInt(healthinsurance[9]) >= total) {
-          billamount = total;
-        } else {
-          billamount = total;
-        }
         if (healthinsurance[11]) {
           billamount += parseInt(paymentdata[8]);
         }
+
+        if (parseInt(healthinsurance[9]) >= total) {
+          billamount += total;
+        } else {
+          billamount += parseInt(healthinsurance[9]);
+        }
+        remainingAmount -= billamount;
 
         const insuraceContract = new Contract(
           NEW_INSURANCE_CONTRACT_ADDRESS,
           insurance_abi,
           signer
         );
+        const tmepobl = [
+          "0xd75AbAA559Fee88F030923e2152BAdA777BC7a03",
+          paymentdata[1]?.toString(),
+          billamount,
+          signer.address,
+          paymentdata[3]?.toString(),
+        ];
+        console.log("temp", tmepobl);
         const response = await insuraceContract.submitHealthInsuranceClaim(
           "0xd75AbAA559Fee88F030923e2152BAdA777BC7a03",
           paymentdata[1]?.toString(),
           billamount,
           signer.address,
-          signer.address,
+
           paymentdata[3]?.toString()
         );
-        console.log(response);
-        const paybill = await billContract.payBill(
-          signer.address,
-          paymentdata[1]?.toString(),
-          billamount,
-          0
-        );
-      } else {
-        const transaction = {
-          to: "0xd75AbAA559Fee88F030923e2152BAdA777BC7a03",
-          value: total,
-        };
-        const txResponse = await signer.sendTransaction(transaction);
-        console.log("Transaction hash:", txResponse.hash);
-
-        const paybill = await billContract.payBill(
-          signer.address,
-          paymentdata[1]?.toString(),
-          0,
-          billamount
-        );
       }
+      const transaction = {
+        to: "0xd75AbAA559Fee88F030923e2152BAdA777BC7a03",
+        value: remainingAmount,
+      };
+      const txResponse = await signer.sendTransaction(transaction);
+      console.log("Transaction hash:", txResponse.hash);
+
+      const paybill = await billContract.payBill(
+        signer.address,
+        paymentdata[1]?.toString(),
+        billamount,
+        remainingAmount
+      );
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
   useEffect(() => {
@@ -174,14 +177,18 @@ const Page = () => {
                 <th>{item[5]?.toString()}</th>
                 <th>{item[6]?.toString()}</th>
                 <th>{item[7] ? "Paid" : "Pending"}</th>
-                <th>
-                  <label
-                    htmlFor="my_modal_6"
-                    className="btn btn-success btn-sm"
-                    onClick={() => handlePay(item)}
-                  >
-                    Pay
-                  </label>
+                <th className="text-center">
+                  {item[7] ? (
+                    "Paid"
+                  ) : (
+                    <label
+                      htmlFor="my_modal_6"
+                      className="btn btn-success btn-sm"
+                      onClick={() => handlePay(item)}
+                    >
+                      Pay
+                    </label>
+                  )}
                 </th>
               </tr>
             ))}

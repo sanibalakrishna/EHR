@@ -57,7 +57,7 @@ const Page = () => {
 
       if (type == "life") {
         const response = await insuraceContract.payLifePremium(signer.address, {
-          value: 1000,
+          value: 10000000000000,
         });
         console.log(response);
       } else {

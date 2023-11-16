@@ -22,6 +22,7 @@ const Page = () => {
   const [temploading, setTemploading] = useState(false);
   const handleAddBill = async (e) => {
     e.preventDefault();
+    console.log(data);
     try {
       setTemploading(true);
       const signer = await getProviderOrSigner(true);
@@ -50,7 +51,7 @@ const Page = () => {
           signer
         );
         const cliamLifeinsurance =
-          await insuraceContract.submitLifeInsuranceClaim(signer.address, {
+          await insuraceContract.submitLifeInsuranceClaim(data.patientId, {
             gasLimit: 500000,
             gasPrice: ethers.parseUnits("100", "gwei"),
           });
