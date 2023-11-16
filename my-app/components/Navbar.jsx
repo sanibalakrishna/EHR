@@ -170,7 +170,7 @@ const RenderList = ({ path }) => {
       { title: "examine details", path: "/patient/examinedetails" },
       { title: "buy insurance", path: "/patient/buyinsurance" },
       { title: "insurances", path: "/patient/insurances" },
-      { title: "paybill", path: "/patient/paybill" },
+
       { title: "bills", path: "/patient/bills" },
     ],
     admin: [

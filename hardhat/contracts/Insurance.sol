@@ -132,11 +132,7 @@ contract InsuranceContract {
     }
 
     // Function to submit a Life insurance claim
-    function submitLifeInsuranceClaim(
-        uint256 _billId,
-        address _holderId
-    ) external {
-        require(!claims[_billId].isVerified, "Claim already verified");
+    function submitLifeInsuranceClaim(address _holderId) external {
         require(
             lifeinsurances[_holderId].paidTerm >=
                 lifeinsurances[_holderId].policyTerm,
@@ -146,14 +142,6 @@ contract InsuranceContract {
         lifeinsurances[_holderId].nomineeId.transfer(
             lifeinsurances[_holderId].balance
         );
-        claims[_billId] = Claim(
-            _billId,
-            lifeinsurances[_holderId].balance,
-            _holderId,
-            lifeinsurances[_holderId].nomineeId,
-            false
-        );
-        emit ClaimSubmitted(_billId);
     }
 
     // Function to verify a Life insurance claim

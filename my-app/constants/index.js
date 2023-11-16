@@ -10,9 +10,9 @@ export const NEW_REPORT_CONTRACT_ADDRESS =
   "0x339AA84BCDb51b254252F64F722299cd11eD512B";
 
 export const NEW_BILL_CONTRACT_ADDRESS =
-  "0xcA014275C4FC26006eCfA4953729FFf2f35357E7";
+  "0x725666104f99F5182D8975Cd1074a52d7c54214d";
 export const NEW_INSURANCE_CONTRACT_ADDRESS =
-  "0x49B6A51457c3D094658828F674aE1bc793eda172";
+  "0x50c80Ff6B5A46152956e1B1f4FC2b6658FCA9e28";
 export const doctor_abi = [
   {
     anonymous: false,
@@ -1975,11 +1975,6 @@ export const insurance_abi = [
   },
   {
     inputs: [
-      {
-        internalType: "uint256",
-        name: "_billId",
-        type: "uint256",
-      },
       {
         internalType: "address",
         name: "_holderId",

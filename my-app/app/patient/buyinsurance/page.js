@@ -11,17 +11,20 @@ import {
   NEW_PATIENT_CONTRACT_ADDRESS,
   patient_abi,
 } from "@/constants";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 const Page = () => {
   const router = useRouter();
-  const { getProviderOrSigner, setLoading } = useContext(Web3walletContext);
+  const { getProviderOrSigner, setLoading, loading } =
+    useContext(Web3walletContext);
   const [data, setData] = useState([]);
   const [lifeinsurancedata, setLifeinsurances] = useState([]);
   const [selectedInsurance, setSelectedInsurance] = useState({});
   const [type, setType] = useState("");
   const tempref = useRef();
   const [nominee, setNominee] = useState({ name: "", address: "" });
+  const [temploading, setTemploading] = useState(false);
+  const closeRef = useRef(null);
 
   const getData = () => {
     setData(healthinsurances);
@@ -36,6 +39,7 @@ const Page = () => {
   };
   const handleBuyInsurance = async () => {
     try {
+      setTemploading(true);
       setLoading(true);
       const signer = await getProviderOrSigner(true);
       const insuraceContract = new Contract(
@@ -49,13 +53,16 @@ const Page = () => {
         signer
       );
       const patientDetails = await patientContract.getPatient(signer.address);
+      console.log(patientDetails);
 
       if (type != "healthinsurance") {
         const response = await insuraceContract.getLifeInsurance(
           signer.address
         );
         if (response[1]?.toString() != "") {
-          toast.error("Life Insurance Already Exists");
+          toast.warn("Life Insurance Already Exists");
+          setTemploading(false);
+          closeRef.current.click();
           return;
         }
 
@@ -79,9 +86,13 @@ const Page = () => {
           signer.address
         );
         if (health[1]?.toString() != "") {
-          toast.error("Health Insurance Already Exists");
+          toast.warn("Health Insurance Already Exists");
+          setTemploading(false);
+          closeRef.current.click();
           return;
         }
+        console.log("patientDetails", patientDetails[0]?.toString());
+        console.log(selectedInsurance, nominee);
         const insurance = await insuraceContract.registerHealthInsurance(
           signer.address,
           patientDetails[0].toString(),
@@ -100,10 +111,11 @@ const Page = () => {
         );
         console.log(insurance);
       }
-
+      setTemploading(false);
       setLoading(false);
+      closeRef.current.click();
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
       // console.error(execution reverted:)
     }
   };
@@ -241,14 +253,18 @@ const Page = () => {
             onChange={handleInputChange}
           />
           <div className="modal-action justify-around">
-            <label htmlFor="my_modal_6" className="btn">
+            <label htmlFor="my_modal_6" className="btn" ref={closeRef}>
               Close!
             </label>
             <button
               className="btn btn-success"
               onClick={() => handleBuyInsurance()}
             >
-              Buy
+              {temploading ? (
+                <span className="loading loading-ring loading-md"></span>
+              ) : (
+                "Buy"
+              )}
             </button>
           </div>
         </div>

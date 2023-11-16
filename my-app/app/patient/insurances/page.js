@@ -83,11 +83,7 @@ const Page = () => {
           {/* head */}
           <thead>
             <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
+              <th>Type</th>
               <th>Nominee Name</th>
               <th>Nominee Address</th>
               <th>Premium Amount</th>
@@ -101,11 +97,7 @@ const Page = () => {
           <tbody>
             {data[1]?.toString() != "" && (
               <tr>
-                <th>
-                  <label>
-                    <input type="checkbox" className="checkbox" />
-                  </label>
-                </th>
+                <th>Life </th>
                 <th>{data[3]?.toString()}</th>
                 <th>{data[2]?.toString()}</th>
                 <th>{data[4]?.toString()}</th>
@@ -131,11 +123,7 @@ const Page = () => {
             )}
             {healthinsurance[1]?.toString() != "" && (
               <tr>
-                <th>
-                  <label>
-                    <input type="checkbox" className="checkbox" />
-                  </label>
-                </th>
+                <th>Health </th>
                 <th>{healthinsurance[3]?.toString()}</th>
                 <th>{healthinsurance[2]?.toString()}</th>
                 <th>{healthinsurance[4]?.toString()}</th>

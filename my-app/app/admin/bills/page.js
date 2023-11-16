@@ -63,6 +63,8 @@ const Page = () => {
               <th>Name</th>
               <th>Disease </th>
               <th>Bill Amount</th>
+              <th>Ambulance Amount</th>
+              <th>Total Amount</th>
               <th>Insurance Amount</th>
               <th>Paid Amount</th>
               <th>Paid Status</th>
@@ -81,6 +83,8 @@ const Page = () => {
                 <th>{item[2].toString()}</th>
                 <th>{diseases[item[3].toString()]}</th>
                 <th>{item[4].toString()}</th>
+                <th>{item[8].toString()}</th>
+                <th>{parseInt(item[8]) + parseInt(item[4])}</th>
                 <th>{item[5].toString()}</th>
                 <th>{item[6].toString()}</th>
                 <th>{item[7] ? "Paid" : "Pending"}</th>

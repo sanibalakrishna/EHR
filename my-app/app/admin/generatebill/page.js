@@ -16,6 +16,7 @@ const Page = () => {
     patientId: "",
     disease: "",
     billAmount: 0,
+    ambulanceAmount: 0,
     status: "Alive",
   });
 
@@ -33,6 +34,8 @@ const Page = () => {
         data.name,
         data.disease,
         data.billAmount,
+        data.ambulanceAmount,
+        data.status == "Alive",
         {
           gasLimit: 500000,
           gasPrice: ethers.parseUnits("100", "gwei"),
@@ -136,6 +139,20 @@ const Page = () => {
               value={data.billAmount}
               onChange={handleChange}
               name="billAmount"
+              required
+            />
+          </div>
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Ambulance Amount</span>
+            </label>
+            <input
+              type="number"
+              placeholder="Phone Number"
+              class="input input-bordered"
+              value={data.ambulanceAmount}
+              onChange={handleChange}
+              name="ambulanceAmount"
               required
             />
           </div>
