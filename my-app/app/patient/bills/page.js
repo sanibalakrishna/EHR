@@ -43,6 +43,7 @@ const Page = () => {
     for (let key in data) {
       resdata.push(data[key]);
     }
+    console.log(resdata);
     setData(resdata);
   };
 
@@ -80,6 +81,7 @@ const Page = () => {
       );
       let remainingAmount = total + parseInt(paymentdata[8]);
       let billamount = 0;
+      let tempbill = 0;
       if (usehealthinsurance) {
         if (healthinsurance[11]) {
           billamount += parseInt(paymentdata[8]);
@@ -97,20 +99,15 @@ const Page = () => {
           insurance_abi,
           signer
         );
-        const tmepobl = [
-          "0xd75AbAA559Fee88F030923e2152BAdA777BC7a03",
-          paymentdata[1]?.toString(),
-          billamount,
-          signer.address,
-          paymentdata[3]?.toString(),
-        ];
-        console.log("temp", tmepobl);
+        tempbill = (parseInt(healthinsurance[5].toString()) / 100) * billamount;
+        remainingAmount = billamount - tempbill;
+        console.log(tempbill, remainingAmount);
+
         const response = await insuraceContract.submitHealthInsuranceClaim(
           "0xd75AbAA559Fee88F030923e2152BAdA777BC7a03",
           paymentdata[1]?.toString(),
-          billamount,
+          tempbill,
           signer.address,
-
           paymentdata[3]?.toString()
         );
       }
@@ -124,7 +121,7 @@ const Page = () => {
       const paybill = await billContract.payBill(
         signer.address,
         paymentdata[1]?.toString(),
-        billamount,
+        tempbill,
         remainingAmount
       );
     } catch (error) {
@@ -226,6 +223,22 @@ const Page = () => {
               />
             </label>
           </div>
+          {usehealthinsurance && (
+            <p className="py-4">
+              Insurance Covered:
+              {(parseInt(healthinsurance[5]?.toString()) / 100) *
+                parseInt(paymentdata[4]?.toString())}
+            </p>
+          )}
+          <p className="py-4">
+            Remaning amount:
+            {!usehealthinsurance
+              ? paymentdata[4]?.toString()
+              : parseInt(paymentdata[4]?.toString()) -
+                (parseInt(healthinsurance[5]?.toString()) / 100) *
+                  parseInt(paymentdata[4]?.toString())}
+          </p>
+
           <div className="modal-action justify-around">
             <label htmlFor="my_modal_6" className="btn">
               Close!

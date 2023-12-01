@@ -10,9 +10,9 @@ export const NEW_REPORT_CONTRACT_ADDRESS =
   "0x339AA84BCDb51b254252F64F722299cd11eD512B";
 
 export const NEW_BILL_CONTRACT_ADDRESS =
-  "0x725666104f99F5182D8975Cd1074a52d7c54214d";
+  "0x20c354B603245733763AaEA7b3B110e9e08b776A";
 export const NEW_INSURANCE_CONTRACT_ADDRESS =
-  "0x0BEC7bd5558F39E7eE8e314bef5505DFD21eC8A8";
+  "0x8C094ea84327538D7923cD54E76b15A7bA0A4720";
 export const doctor_abi = [
   {
     anonymous: false,
@@ -1539,7 +1539,7 @@ export const insurance_abi = [
           },
           {
             internalType: "uint256",
-            name: "coverageAmount",
+            name: "percentageCovered",
             type: "uint256",
           },
           {
@@ -1699,7 +1699,7 @@ export const insurance_abi = [
       },
       {
         internalType: "uint256",
-        name: "coverageAmount",
+        name: "percentageCovered",
         type: "uint256",
       },
       {
@@ -1926,7 +1926,7 @@ export const insurance_abi = [
       },
       {
         internalType: "uint256",
-        name: "_coverageAmount",
+        name: "_percentageCovered",
         type: "uint256",
       },
       {

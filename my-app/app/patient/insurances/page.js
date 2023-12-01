@@ -87,7 +87,7 @@ const Page = () => {
               <th>Nominee Name</th>
               <th>Nominee Address</th>
               <th>Premium Amount</th>
-              <th>Coverage Amount</th>
+              <th>Percentage Covered</th>
               <th>Bought time</th>
               <th>Tenture</th>
               <th>Balance</th>
@@ -101,7 +101,7 @@ const Page = () => {
                 <th>{data[3]?.toString()}</th>
                 <th>{data[2]?.toString()}</th>
                 <th>{data[4]?.toString()}</th>
-                <th>{data[5]?.toString()}</th>
+                <th>-</th>
                 <th>
                   {new Date(data[8]?.toString() * 1000).toLocaleTimeString() +
                     " " +
@@ -127,7 +127,7 @@ const Page = () => {
                 <th>{healthinsurance[3]?.toString()}</th>
                 <th>{healthinsurance[2]?.toString()}</th>
                 <th>{healthinsurance[4]?.toString()}</th>
-                <th>{healthinsurance[5]?.toString()}</th>
+                <th>{healthinsurance[5]?.toString() + " %"}</th>
                 <th>
                   {new Date(
                     healthinsurance[8]?.toString() * 1000

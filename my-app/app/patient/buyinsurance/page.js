@@ -99,7 +99,7 @@ const Page = () => {
           nominee.name,
           nominee.address,
           selectedInsurance.premiumamount,
-          selectedInsurance.premiumamount,
+          selectedInsurance.percentagecovered,
           selectedInsurance.policyterms,
           selectedInsurance.ambulancecovered,
           selectedInsurance.indexeddiseases,
@@ -156,6 +156,9 @@ const Page = () => {
               </p>
               <p className="text-md ">
                 {item.ambulancecovered ? "*Ambulance Amount Covered" : ""}
+              </p>
+              <p className="text-lg font-semibold">
+                Precentage Covered: {item.percentagecovered}%
               </p>
               <div className="card-actions justify-end">
                 <label

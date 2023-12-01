@@ -24,7 +24,7 @@ contract InsuranceContract {
         string nomineeName;
         address payable nomineeId;
         uint256 premiumAmount;
-        uint256 coverageAmount;
+        uint256 percentageCovered;
         uint256 policyTerm;
         uint256 paidTerm;
         uint256 startTime;
@@ -66,7 +66,7 @@ contract InsuranceContract {
         string memory _nomineeName,
         address payable _nomineeId,
         uint256 _premiumAmount,
-        uint256 _coverageAmount,
+        uint256 _percentageCovered,
         uint256 _policyTerm
     ) external payable {
         require(_holderId != address(0), "Invalid holder address");
@@ -74,7 +74,6 @@ contract InsuranceContract {
         require(bytes(_nomineeName).length > 0, "Invalid nominee name");
         require(_nomineeId != address(0), "Invalid nominee address");
         require(_premiumAmount > 0, "Invalid premium amount");
-        require(_coverageAmount > 0, "Invalid limit");
 
         lifeinsurances[_holderId] = Life(
             _holderId,
@@ -82,7 +81,7 @@ contract InsuranceContract {
             _nomineeName,
             _nomineeId,
             _premiumAmount,
-            _coverageAmount,
+            _percentageCovered,
             _policyTerm,
             1,
             block.timestamp,

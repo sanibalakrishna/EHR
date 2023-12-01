@@ -14,7 +14,7 @@ const Page = () => {
   const [data, setData] = useState({
     name: "",
     patientId: "",
-    disease: "",
+    disease: 1,
     billAmount: 0,
     ambulanceAmount: 0,
     status: "Alive",
@@ -31,10 +31,11 @@ const Page = () => {
         bill_abi,
         signer
       );
+      console.log(data.disease);
       const billId = await billContract.createBill(
         data.patientId,
         data.name,
-        data.disease,
+        data.disease.toString(),
         data.billAmount,
         data.ambulanceAmount,
         data.status == "Alive",
@@ -63,7 +64,7 @@ const Page = () => {
       setData({
         name: "",
         patientId: "",
-        disease: "",
+        disease: 1,
         billAmount: 0,
         ambulanceAmount: 0,
         status: "Alive",
